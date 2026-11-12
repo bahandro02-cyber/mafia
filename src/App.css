@@ -1,284 +1,288 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap');
+
+:root {
+  font-family: 'Inter', sans-serif;
+  color: #f8f8fc;
+  background: #08080c;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --red: #ff243f;
+  --red-dark: #a80019;
+  --panel: rgba(20, 19, 26, .88);
+  --border: rgba(255, 255, 255, .1);
+}
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: #fff;
-  color: #111;
+  min-width: 320px;
   min-height: 100vh;
-}
-
-.app {
-  min-height: 100vh;
-  width: 100%;
-  padding: 45px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
   background:
-    radial-gradient(circle at 10% 10%, #e9e9e9 0, transparent 28%),
-    radial-gradient(circle at 90% 90%, #dedede 0, transparent 30%),
-    #fff;
-  animation: backgroundAppear 1s ease;
+    radial-gradient(ellipse at 15% 20%, rgba(160, 0, 30, .22), transparent 40%),
+    radial-gradient(ellipse at 90% 80%, rgba(95, 0, 25, .18), transparent 35%),
+    #08080c;
 }
 
-.game-card {
-  width: 100%;
-  max-width: 520px;
-  padding: 38px;
-  background: #fff;
-  border: 2px solid #111;
-  border-radius: 24px;
-  box-shadow: 12px 12px 0 #111;
-  text-align: center;
-  animation: cardAppear 0.75s cubic-bezier(.2,.8,.2,1) both;
-  transition: box-shadow .3s ease, transform .3s ease;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+  background-size: 45px 45px;
+  mask-image: linear-gradient(to bottom, black, transparent);
 }
 
-.game-card:hover {
-  box-shadow: 16px 16px 0 #111;
-  transform: translateY(-3px);
+#root {
+  min-height: 100vh;
 }
 
-h1 {
-  font-size: clamp(30px, 7vw, 44px);
+button, input {
+  font-family: inherit;
+}
+
+.mafia-app {
+  position: relative;
+  width: min(100%, 1000px);
+  min-height: 100vh;
+  margin: auto;
+  padding: 45px 28px 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: entrance .7s ease;
+}
+
+/* LOGO */
+
+.mafia-app > h1:first-child {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(36px, 7vw, 68px);
   font-weight: 900;
-  letter-spacing: -2px;
-  color: #111;
-  margin-bottom: 8px;
-  animation: titleAppear 1s ease both;
+  letter-spacing: 5px;
+  text-align: center;
+  margin-bottom: 12px;
+  color: white;
+  text-shadow:
+    0 0 8px #ff243f,
+    0 0 25px rgba(255, 36, 63, .8),
+    0 0 60px rgba(255, 36, 63, .35);
+  animation: logoGlow 3s infinite alternate;
 }
+
+.mafia-app > p {
+  color: #aaa7b2;
+  text-align: center;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+/* HEADINGS */
 
 h2 {
-  font-size: 25px;
-  font-weight: 900;
-  margin: 22px 0 14px;
+  width: 100%;
+  font-size: 23px;
+  font-weight: 800;
+  margin: 17px 0;
+  color: #fff;
 }
 
 h3 {
-  font-size: 16px;
-  font-weight: 800;
-  margin: 22px 0 12px;
+  font-size: 19px;
+  margin: 14px 0;
+  color: #ff5266;
 }
 
-.subtitle {
-  color: #777;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 4px;
-  margin-bottom: 30px;
-  animation: fadeUp .8s .2s both;
-}
+/* INPUTS */
 
-.online-box {
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 18px;
-  padding: 24px;
-  margin: 20px 0;
-  animation: fadeUp .7s .25s both;
-  transition: box-shadow .3s ease;
-}
-
-.online-box:hover {
-  box-shadow: 0 12px 30px #00000012;
-}
-
-input,
-select {
-  display: block;
+input {
   width: 100%;
-  padding: 16px 18px;
-  margin: 12px 0;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  background: #fff;
-  color: #111;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 600;
+  max-width: 470px;
+  padding: 17px 19px;
+  margin: 10px 0;
+  border: 1px solid #37323e;
+  border-radius: 13px;
+  background: #17151d;
+  color: white;
+  font-size: 16px;
   outline: none;
-  transition: border-color .25s, box-shadow .25s, transform .25s;
-}
-
-input:focus,
-select:focus {
-  border-color: #111;
-  box-shadow: 0 0 0 4px #11111115;
-  transform: translateY(-2px);
+  transition: .25s;
 }
 
 input::placeholder {
-  color: #999;
+  color: #77727f;
 }
+
+input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(255,36,63,.12);
+}
+
+/* BUTTONS */
 
 button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.start {
   position: relative;
   overflow: hidden;
-  width: 100%;
-  padding: 17px 20px;
-  margin: 10px 0;
-  border: 2px solid #111;
+  padding: 14px 23px;
+  margin: 7px 5px;
+  border: 1px solid rgba(255,255,255,.12);
   border-radius: 12px;
-  background: #111;
-  color: #fff;
+  background: linear-gradient(135deg, #292630, #17151d);
+  color: white;
   font-size: 14px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  transition: background .25s, color .25s, transform .25s, box-shadow .25s;
+  font-weight: 800;
+  letter-spacing: .4px;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
 }
 
-.start::before {
+button::after {
   content: "";
   position: absolute;
   top: 0;
   left: -120%;
   width: 70%;
   height: 100%;
-  background: linear-gradient(
-    110deg,
-    transparent,
-    #ffffff45,
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.13), transparent);
   transform: skewX(-20deg);
-  transition: left .6s ease;
+  transition: .6s;
 }
 
-.start:hover::before {
-  left: 150%;
+button:hover::after {
+  left: 140%;
 }
 
-.start:hover:not(:disabled) {
-  background: #fff;
-  color: #111;
-  transform: translateY(-4px);
-  box-shadow: 5px 5px 0 #111;
+button:hover {
+  transform: translateY(-3px);
+  border-color: var(--red);
+  box-shadow: 0 8px 25px rgba(255,36,63,.18);
 }
 
-.start:active:not(:disabled) {
+button:active {
   transform: scale(.97);
+}
+
+button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+  transform: none;
   box-shadow: none;
 }
 
-.start:disabled {
-  opacity: .4;
-  cursor: not-allowed;
+/* MAIN ACTION BUTTONS */
+
+.mafia-app > button {
+  background: linear-gradient(135deg, #ed1837, #990019);
+  border: 1px solid #ff3c55;
+  box-shadow: 0 5px 22px rgba(255,36,63,.15);
 }
 
-.role {
+/* PANELS */
+
+.mafia-app section {
+  width: 100%;
+  margin: 15px 0;
   padding: 24px;
-  margin: 20px 0;
-  background: #111;
-  color: #fff;
-  border-radius: 16px;
-  border: 2px solid #111;
-  animation: roleAppear .5s ease both;
-  transition: transform .3s, box-shadow .3s;
+  border: 1px solid #38303b;
+  border-radius: 19px;
+  background:
+    linear-gradient(145deg, rgba(35,30,39,.96), rgba(13,12,17,.96));
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.3),
+    inset 0 1px rgba(255,255,255,.04);
+  animation: panelAppear .5s ease both;
 }
 
-.role:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 25px #00000025;
+.mafia-app section h2 {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
-.role h2,
-.role h3 {
-  color: #fff;
-}
-
-.player {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 15px 18px;
+.mafia-app section p {
+  color: #c7c3ce;
+  line-height: 1.7;
   margin: 9px 0;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
+}
+
+/* PLAYER LIST */
+
+.mafia-app section p:has(+ p) {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.025);
+}
+
+/* ROLE */
+
+.mafia-app section h2:first-child {
+  color: #ff5266;
+}
+
+.mafia-app section h2 + p {
+  color: #dedbe4;
+}
+
+/* SELECTED PLAYER */
+
+button.selected {
+  background: linear-gradient(135deg, #ff243f, #a9001c) !important;
+  border-color: #ff5266 !important;
+  box-shadow: 0 0 20px rgba(255,36,63,.4);
+  transform: translateY(-2px);
+}
+
+/* STATUS MESSAGE */
+
+.mafia-app > p:not(:first-of-type) {
+  width: 100%;
+  padding: 13px 17px;
+  border: 1px solid rgba(255,36,63,.25);
+  border-radius: 11px;
+  background: rgba(255,36,63,.07);
+  color: #ff9aa7;
+}
+
+/* ROOM CODE / GAME RESULT */
+
+.mafia-app > h2 {
+  text-align: center;
+  padding: 15px;
+  border: 1px solid rgba(255,36,63,.25);
+  border-radius: 13px;
+  background: rgba(255,36,63,.07);
+}
+
+.mafia-app > h3 {
+  width: 100%;
+  padding: 17px;
   border-radius: 12px;
-  color: #111;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: left;
-  animation: fadeUp .4s ease both;
-  transition: transform .2s, background .2s, border-color .2s;
+  background: rgba(255,36,63,.08);
+  text-align: center;
 }
 
-.player:hover {
-  transform: translateX(5px);
-  background: #fff;
-  border-color: #111;
+/* FINISH */
+
+.mafia-app section h1 {
+  font-family: 'Orbitron', sans-serif;
+  color: #ffcc57;
+  font-size: clamp(25px, 5vw, 42px);
+  text-align: center;
+  text-shadow: 0 0 25px rgba(255,180,50,.4);
 }
 
-.hint {
-  color: #777;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.6;
-  margin: 16px 0;
-  overflow-wrap: anywhere;
-  animation: fadeUp .5s ease both;
-}
+/* ANIMATIONS */
 
-label {
-  display: block;
-  margin: 15px 0 8px;
-  font-weight: 800;
-  text-align: left;
-}
-
-hr {
-  border: none;
-  border-top: 2px solid #eee;
-  margin: 25px 0;
-  animation: fadeUp .6s ease both;
-}
-
-button:focus-visible {
-  outline: 3px solid #777;
-  outline-offset: 4px;
-}
-
-@keyframes cardAppear {
+@keyframes entrance {
   from {
     opacity: 0;
-    transform: translateY(35px) scale(.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes titleAppear {
-  from {
-    opacity: 0;
-    transform: translateY(-18px);
-    letter-spacing: 5px;
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    letter-spacing: -2px;
-  }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -286,47 +290,54 @@ button:focus-visible {
   }
 }
 
-@keyframes roleAppear {
+@keyframes panelAppear {
   from {
     opacity: 0;
-    transform: scale(.92);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 
-@keyframes backgroundAppear {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes logoGlow {
+  from {
+    text-shadow: 0 0 8px #ff243f, 0 0 20px rgba(255,36,63,.4);
+  }
+  to {
+    text-shadow: 0 0 15px #ff243f, 0 0 45px rgba(255,36,63,.8);
+  }
 }
+
+/* MOBILE */
 
 @media (max-width: 600px) {
-  .app {
-    padding: 20px 14px;
+  .mafia-app {
+    padding: 30px 15px 45px;
   }
 
-  .game-card {
-    padding: 25px 18px;
-    border-radius: 18px;
-    box-shadow: 7px 7px 0 #111;
+  .mafia-app > h1:first-child {
+    font-size: 35px;
+    letter-spacing: 2px;
   }
 
-  .online-box {
+  .mafia-app section {
     padding: 17px;
+    border-radius: 15px;
   }
 
-  h1 {
-    letter-spacing: -1.5px;
+  .mafia-app section h2 {
+    font-size: 20px;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
+  button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 15px;
+  }
+
+  input {
+    max-width: 100%;
   }
 }
